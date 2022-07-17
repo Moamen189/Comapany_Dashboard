@@ -1,0 +1,64 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Employee</h1>
+
+<br />
+<br /> 
+
+<form asp-action="Edit">
+    <div asp-validation-summary="All"></div>
+    <input hidden asp-for="Id" />
+       <div class ="form-group">
+        <label class="cal-form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class ="form-group">
+        <label class="cal-form-label" asp-for="Age"></label>
+        <input class="form-control" asp-for="Age" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+       <div class ="form-group">
+        <label class="cal-form-label" asp-for="Address"></label>
+        <input class="form-control" asp-for="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="Salary"></label>
+        <input class="form-control" asp-for="Salary" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="IsActive"></label>
+        <input class="form-control" asp-for="IsActive" />
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+    </div>
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="PhoneNumber"></label>
+        <input class="form-control" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="HireDate"></label>
+        <input class="form-control" asp-for="HireDate" />
+        <span asp-validation-for="HireDate" class="text-danger"></span>
+    </div>
+    <input type="submit" class ="btn btn-primary" value="save"/> |
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-warning">Back To List</a>
+</form>
+
+@section SecriptSection {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+}
