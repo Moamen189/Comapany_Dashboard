@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PresentationLayer.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,9 @@ namespace PresentationLayer
            });
             services.AddScoped<IDepartmentRepository , DepartmentRepository>();
             services.AddScoped< IEmployeeRepository ,EmployeeRepository > ();
+            services.AddAutoMapper(M => M.AddProfile(new DepartmentProfiles()));
+            services.AddAutoMapper(M => M.AddProfile(new EmployeeProfile()));
+
 
         }
 

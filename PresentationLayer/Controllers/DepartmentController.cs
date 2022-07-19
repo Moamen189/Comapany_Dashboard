@@ -1,6 +1,8 @@
-﻿using BussniessLayer.Interfaces;
+﻿using AutoMapper;
+using BussniessLayer.Interfaces;
 using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using PresentationLayer.Models;
 using System;
 
 namespace PresentationLayer.Controllers
@@ -8,10 +10,12 @@ namespace PresentationLayer.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository departmentRepository;
+        private readonly IMapper mapper;
 
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        public DepartmentController(IDepartmentRepository departmentRepository , IMapper Mapper)
         {
             this.departmentRepository = departmentRepository;
+            this.mapper = Mapper;
         }
         public IActionResult Index()
         {
@@ -42,11 +46,12 @@ namespace PresentationLayer.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Department department)
+        public IActionResult Create(DepartmentViewModel department)
         {
             if (ModelState.IsValid)
             {
-                departmentRepository.Add(department);
+                var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
+                departmentRepository.Add(DeptModel);
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -71,7 +76,7 @@ namespace PresentationLayer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] //oppisite any outside Tool 
-        public IActionResult Edit([FromRoute] int? id ,    Department department)
+        public IActionResult Edit([FromRoute] int? id , DepartmentViewModel department)
         {
 
             if(id!= department.Id)
@@ -80,7 +85,9 @@ namespace PresentationLayer.Controllers
             {
                 try
                 {
-                    departmentRepository.Update(department);
+                    var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
+
+                    departmentRepository.Update(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
                 catch(Exception ex)
@@ -101,7 +108,7 @@ namespace PresentationLayer.Controllers
 
         [HttpPost]
 
-        public IActionResult Delete([FromRoute] int? id, Department department)
+        public IActionResult Delete([FromRoute] int? id, DepartmentViewModel department)
         {
 
             if (id != department.Id)
@@ -109,7 +116,10 @@ namespace PresentationLayer.Controllers
            
                 try
                 {
-                    departmentRepository.Delete(department);
+                    var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
+
+
+                     departmentRepository.Delete(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
