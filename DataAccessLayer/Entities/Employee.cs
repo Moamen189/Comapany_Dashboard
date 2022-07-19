@@ -30,6 +30,8 @@ namespace DataAccessLayer.Entities
 
         public DateTime HireDate { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;
+
+        public virtual Department Department { get; set; } 
         
     }
 }

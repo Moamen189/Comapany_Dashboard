@@ -15,6 +15,8 @@ namespace PresentationLayer.Controllers
         }
         public IActionResult Index()
         {
+            //ViewData["Message"] = "Hellp View Data";
+            //ViewBag.Messages = "Hello View Bag";
         
             return View(departmentRepository.GetAll());
         }
@@ -35,6 +37,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Create()
         {
+            TempData["Message"] = "Department Created Successfully";
 
             return View();
         }

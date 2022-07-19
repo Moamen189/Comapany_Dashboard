@@ -18,5 +18,7 @@ namespace DataAccessLayer.Entities
         public string Code { get; set; }
 
         public DateTime DateOfCreation { get; set; }
+
+        public virtual ICollection<Employee> Departments { get; set; } = new HashSet<Employee>();
     }
 }

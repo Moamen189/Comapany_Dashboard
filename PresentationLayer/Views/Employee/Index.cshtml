@@ -48,16 +48,9 @@
                     <td>@Employee.Email</td>*@
                     <td>@Employee.PhoneNumber</td>
                     <td>@Employee.HireDate</td>
+                    <partial name="_PartialView" model="@Employee.Id"/>
 
-                    <td><a asp-action="Details" asp-controller="Employee" asp-route-id="@Employee.Id" class="btn btn-success">
-                        <i class="fas fa-eye"></i>Details</a>
-                        </td>
-                    <td><a asp-action="Edit" asp-controller="Employee" asp-route-id="@Employee.Id" class="btn btn-warning">
-                        <i class="fas fa-edit"></i>Update</a>
-                        </td>
-                    <td><a asp-action="Delete" asp-controller="Employee" asp-route-id="@Employee.Id" class="btn btn-danger">
-                        <i class="fas fa-trash"></i>Delete</a>
-                        </td>
+                   
 
 
                 </tr>
