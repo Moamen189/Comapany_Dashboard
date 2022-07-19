@@ -22,7 +22,7 @@ namespace PresentationLayer.Controllers
         {
             //ViewData["Message"] = "Hellp View Data";
             //ViewBag.Messages = "Hello View Bag";
-            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departmentRepository.GetAll());
+            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departmentRepository.GetAll().Result);
 
 
             return View(DeptModel);
