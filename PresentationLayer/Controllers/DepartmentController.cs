@@ -4,6 +4,7 @@ using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Models;
 using System;
+using System.Collections.Generic;
 
 namespace PresentationLayer.Controllers
 {
@@ -21,8 +22,10 @@ namespace PresentationLayer.Controllers
         {
             //ViewData["Message"] = "Hellp View Data";
             //ViewBag.Messages = "Hello View Bag";
-        
-            return View(departmentRepository.GetAll());
+            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departmentRepository.GetAll());
+
+
+            return View(DeptModel);
         }
 
         public IActionResult Details(int? id , string ViewName= "Details")

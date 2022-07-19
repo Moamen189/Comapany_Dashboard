@@ -4,6 +4,7 @@ using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Models;
 using System;
+using System.Collections.Generic;
 
 namespace PresentationLayer.Controllers
 {
@@ -22,7 +23,8 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Index()
         {
-            return View(EmployeeRepository.GetAll());
+            var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >(EmployeeRepository.GetAll());
+            return View(mappedEmployee);
         }
 
         public IActionResult Details(int? id, string ViewName = "Details")
@@ -60,7 +62,7 @@ namespace PresentationLayer.Controllers
                 //    Email = Employee.Email,
                 //    HireDate = Employee.HireDate,
                 //    IsActive = Employee.IsActive,
-                //    PhoneNumber = Employee.PhoneNumber,
+                //    PhoneNumber = Employee.PhoneNumber
                 //    Salary = Employee.Salary,
 
                 //};
