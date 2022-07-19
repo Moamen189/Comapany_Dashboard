@@ -5,32 +5,36 @@ using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PresentationLayer.Controllers
 {
     public class EmployeeController : Controller
     {
-        public IEmployeeRepository EmployeeRepository { get; }
-        public IDepartmentRepository DepartmentRepository { get; }
+        public IUnitOfWork UnitOfWork { get; }
+
+        //public IEmployeeRepository EmployeeRepository { get; }
+        //public IDepartmentRepository DepartmentRepository { get; }
         public IMapper Map { get; }
 
-        public EmployeeController(IEmployeeRepository EmployeeRepository , IDepartmentRepository departmentRepository , IMapper Map)
+        public EmployeeController(IUnitOfWork unitOfWork, IMapper Map)
         {
-            this.EmployeeRepository = EmployeeRepository;
-            DepartmentRepository = departmentRepository;
+            UnitOfWork = unitOfWork;
+            //this.EmployeeRepository = EmployeeRepository;
+            //DepartmentRepository = departmentRepository;
             this.Map = Map;
         }
 
-        public IActionResult Index( string SearchValue)
+        public async Task<IActionResult> Index( string SearchValue)
         {
             if (string.IsNullOrEmpty(SearchValue))
             {
-            var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >(EmployeeRepository.GetAll());
-            return View(mappedEmployee);
+            var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >(await UnitOfWork.EmployeeRepository.GetAll());
+            return  View(mappedEmployee);
 
             }else
             {
-                var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(EmployeeRepository.SearchEmployee(SearchValue));
+                var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(UnitOfWork.EmployeeRepository.SearchEmployee(SearchValue));
                 return View(mappedEmployee);
 
             }
@@ -42,7 +46,7 @@ namespace PresentationLayer.Controllers
             if (id == null)
                 return NotFound();
 
-            var Employee = EmployeeRepository.Get(id);
+            var Employee = UnitOfWork.EmployeeRepository.Get(id);
 
             if (Employee == null)
                 return NotFound();
@@ -52,7 +56,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Departments = DepartmentRepository.GetAll();
+            ViewBag.Departments = UnitOfWork.DepartmentRepository.GetAll();
 
             return View();
         }
@@ -77,10 +81,10 @@ namespace PresentationLayer.Controllers
                 //};
 
                 var mappedEmployee = Map.Map<EmployeeViewModel , Employee>(Employee);
-                EmployeeRepository.Add(mappedEmployee);
+                UnitOfWork.EmployeeRepository.Add(mappedEmployee);
                 return RedirectToAction("Index");
             }
-            ViewBag.Departments = DepartmentRepository.GetAll();
+            ViewBag.Departments = UnitOfWork.DepartmentRepository.GetAll();
 
             return View(Employee);
 
@@ -88,7 +92,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Edit(int? id)
         {
-            ViewBag.Departments = DepartmentRepository.GetAll();
+            ViewBag.Departments = UnitOfWork.DepartmentRepository.GetAll();
 
             //if (id == null)
             //    return NotFound();
@@ -116,7 +120,7 @@ namespace PresentationLayer.Controllers
                 {
                     var mappedEmployee = Map.Map<EmployeeViewModel, Employee>(Employee);
 
-                    EmployeeRepository.Update(mappedEmployee);
+                    UnitOfWork.EmployeeRepository.Update(mappedEmployee);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
@@ -125,7 +129,7 @@ namespace PresentationLayer.Controllers
                     return View(Employee);
                 }
             }
-            ViewBag.Departments = DepartmentRepository.GetAll();
+            ViewBag.Departments = UnitOfWork.DepartmentRepository.GetAll();
 
             return View(Employee);
         }
@@ -149,7 +153,7 @@ namespace PresentationLayer.Controllers
             {
                 var mappedEmployee = Map.Map<EmployeeViewModel, Employee>(Employee);
 
-                EmployeeRepository.Delete(mappedEmployee);
+                UnitOfWork.EmployeeRepository.Delete(mappedEmployee);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

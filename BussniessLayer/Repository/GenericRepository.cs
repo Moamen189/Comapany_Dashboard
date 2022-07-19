@@ -1,5 +1,6 @@
 ﻿using BussniessLayer.Interfaces;
 using DataAccessLayer.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,27 +18,29 @@ namespace BussniessLayer.Repository
             this.context = context;
         }
 
-        public int Add(T item)
+        public async Task<int> Add(T item)
         {
             context.Set<T>().Add(item);
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
         }
 
-        public int Delete(T item)
+        public async Task<int> Delete(T item)
         {
             context.Set<T>().Remove(item);
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
+
         }
 
-        public T Get(int? id)
-        => context.Set<T>().Find(id);
+        public async Task<T> Get(int? id)
+        => await context.Set<T>().FindAsync(id);
 
-        public IEnumerable<T> GetAll()
-        => context.Set<T>().ToList();
-        public int Update(T item)
+        public async  Task<IEnumerable<T>> GetAll()
+        => await context.Set<T>().ToListAsync();
+        public async Task<int> Update(T item)
         {
             context.Set<T>().Update(item);
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
+
         }
     }
 }

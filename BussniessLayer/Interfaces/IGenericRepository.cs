@@ -8,11 +8,11 @@ namespace BussniessLayer.Interfaces
 {
     public interface IGenericRepository<T>
     {
-        T Get(int? id);
-        IEnumerable<T> GetAll();
+        Task<T> Get(int? id);
+        Task<IEnumerable<T>> GetAll();
 
-        int Add(T T);
-        int Update(T T);
-        int Delete(T T);
+        Task<int> Add(T T);
+        Task<int> Update(T T);
+        Task<int> Delete(T T);
     }
 }
