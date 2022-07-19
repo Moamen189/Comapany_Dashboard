@@ -8,9 +8,12 @@ namespace PresentationLayer.Controllers
     public class EmployeeController : Controller
     {
         public IEmployeeRepository EmployeeRepository { get; }
-        public EmployeeController(IEmployeeRepository EmployeeRepository)
+        public IDepartmentRepository DepartmentRepository { get; }
+
+        public EmployeeController(IEmployeeRepository EmployeeRepository , IDepartmentRepository departmentRepository)
         {
             this.EmployeeRepository = EmployeeRepository;
+            DepartmentRepository = departmentRepository;
         }
 
         public IActionResult Index()
@@ -34,6 +37,7 @@ namespace PresentationLayer.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Departments = DepartmentRepository.GetAll();
 
             return View();
         }
@@ -45,12 +49,15 @@ namespace PresentationLayer.Controllers
                 EmployeeRepository.Add(Employee);
                 return RedirectToAction("Index");
             }
+            ViewBag.Departments = DepartmentRepository.GetAll();
+
             return View(Employee);
 
         }
 
         public IActionResult Edit(int? id)
         {
+            ViewBag.Departments = DepartmentRepository.GetAll();
 
             //if (id == null)
             //    return NotFound();
@@ -85,6 +92,8 @@ namespace PresentationLayer.Controllers
                     return View(Employee);
                 }
             }
+            ViewBag.Departments = DepartmentRepository.GetAll();
+
             return View(Employee);
         }
 
