@@ -16,12 +16,17 @@ namespace BussniessLayer.Repository
 
         public EmployeeRepository(MvcContext context):base(context)
         {
-            
+            Context = context;
         }
+
+        public MvcContext Context { get; }
 
         public IEnumerable<Employee> GetEmployeeByDepartmentName(string DepartmentName)
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Employee> SearchEmployee(string value)
+        => Context.Employees.Where(e => e.Name.Contains(value));
     }
 }

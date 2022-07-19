@@ -21,10 +21,19 @@ namespace PresentationLayer.Controllers
             this.Map = Map;
         }
 
-        public IActionResult Index()
+        public IActionResult Index( string SearchValue)
         {
+            if (string.IsNullOrEmpty(SearchValue))
+            {
             var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >(EmployeeRepository.GetAll());
             return View(mappedEmployee);
+
+            }else
+            {
+                var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel>>(EmployeeRepository.SearchEmployee(SearchValue));
+                return View(mappedEmployee);
+
+            }
         }
 
         public IActionResult Details(int? id, string ViewName = "Details")

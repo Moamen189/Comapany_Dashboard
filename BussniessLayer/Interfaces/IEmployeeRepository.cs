@@ -17,5 +17,8 @@ namespace BussniessLayer.Interfaces
         //int Add(Employee Employee);
         //int Update(Employee Employee);
         //int Delete(Employee Employee);
+
+        IEnumerable<Employee> SearchEmployee(string Name);
     }
+
 }
