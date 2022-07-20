@@ -10,19 +10,21 @@ namespace PresentationLayer.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentRepository departmentRepository;
+        //private readonly IDepartmentRepository departmentRepository;
+        private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
 
-        public DepartmentController(IDepartmentRepository departmentRepository , IMapper Mapper)
+        public DepartmentController(IUnitOfWork unitOfWork, IMapper Mapper)
         {
-            this.departmentRepository = departmentRepository;
+            //this.departmentRepository = departmentRepository;
+            this.unitOfWork = unitOfWork;
             this.mapper = Mapper;
         }
         public IActionResult Index()
         {
             //ViewData["Message"] = "Hellp View Data";
             //ViewBag.Messages = "Hello View Bag";
-            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departmentRepository.GetAll().Result);
+            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(unitOfWork.DepartmentRepository.GetAll().Result);
 
 
             return View(DeptModel);
@@ -34,7 +36,7 @@ namespace PresentationLayer.Controllers
            if(id == null )
                 return NotFound();
 
-           var Department = departmentRepository.Get(id);
+           var Department = unitOfWork.DepartmentRepository.Get(id);
 
             if (Department== null)
                 return NotFound();
@@ -54,7 +56,7 @@ namespace PresentationLayer.Controllers
             if (ModelState.IsValid)
             {
                 var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
-                departmentRepository.Add(DeptModel);
+                unitOfWork.DepartmentRepository.Add(DeptModel);
                 return RedirectToAction("Index");
             }
             return View(department);
@@ -90,7 +92,7 @@ namespace PresentationLayer.Controllers
                 {
                     var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
 
-                    departmentRepository.Update(DeptModel);
+                    unitOfWork.DepartmentRepository.Update(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
                 catch(Exception ex)
@@ -122,7 +124,7 @@ namespace PresentationLayer.Controllers
                     var DeptModel = mapper.Map<DepartmentViewModel, Department>(department);
 
 
-                     departmentRepository.Delete(DeptModel);
+                unitOfWork.DepartmentRepository.Delete(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
