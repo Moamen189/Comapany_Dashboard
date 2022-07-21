@@ -1,5 +1,6 @@
 ﻿using BussniessLayer.Interfaces;
 using DataAccessLayer.Context;
+using DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,11 @@ namespace BussniessLayer.Repository
         => await context.Set<T>().FindAsync(id);
 
         public async  Task<IEnumerable<T>> GetAll()
-        => await context.Set<T>().ToListAsync();
+        {
+            if(typeof(T) == typeof(Employee))
+                return (IEnumerable<T>)await context.Set<Employee>().Include(E => E.Department).ToListAsync();
+            return await context.Set<T>().ToListAsync();
+        }
         public async Task<int> Update(T item)
         {
             context.Set<T>().Update(item);
