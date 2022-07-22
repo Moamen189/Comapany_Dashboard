@@ -19,32 +19,32 @@ namespace BussniessLayer.Repository
             this.context = context;
         }
 
-        public async Task<int> Add(T item)
+        public  int Add(T item)
         {
             context.Set<T>().Add(item);
-            return await context.SaveChangesAsync();
+            return  context.SaveChanges();
         }
 
-        public async Task<int> Delete(T item)
+        public  int Delete(T item)
         {
             context.Set<T>().Remove(item);
-            return await context.SaveChangesAsync();
+            return  context.SaveChanges();
 
         }
 
-        public async Task<T> Get(int? id)
-        => await context.Set<T>().FindAsync(id);
+        public  T Get(int? id)
+        =>  context.Set<T>().Find(id);
 
-        public async  Task<IEnumerable<T>> GetAll()
+        public   IEnumerable<T> GetAll()
         {
             if(typeof(T) == typeof(Employee))
-                return (IEnumerable<T>)await context.Set<Employee>().Include(E => E.Department).ToListAsync();
-            return await context.Set<T>().ToListAsync();
+                return (IEnumerable<T>) context.Set<Employee>().Include(E => E.Department).ToList();
+            return  context.Set<T>().ToList();
         }
-        public async Task<int> Update(T item)
+        public  int Update(T item)
         {
             context.Set<T>().Update(item);
-            return await context.SaveChangesAsync();
+            return  context.SaveChanges();
 
         }
     }

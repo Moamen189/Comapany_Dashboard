@@ -2,6 +2,7 @@
 using BussniessLayer.Interfaces;
 using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using PresentationLayer.Helper;
 using PresentationLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,11 @@ namespace PresentationLayer.Controllers
             this.Map = Map;
         }
 
-        public async Task<IActionResult> Index( string SearchValue)
+        public IActionResult Index( string SearchValue)
         {
             if (string.IsNullOrEmpty(SearchValue))
             {
-            var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >(await UnitOfWork.EmployeeRepository.GetAll());
+            var mappedEmployee = Map.Map<IEnumerable<Employee>, IEnumerable<EmployeeViewModel> >( UnitOfWork.EmployeeRepository.GetAll());
             return  View(mappedEmployee);
 
             }else
@@ -79,7 +80,7 @@ namespace PresentationLayer.Controllers
                 //    Salary = Employee.Salary,
 
                 //};
-
+               Employee.ImageName = DocumentSettings.Upload(Employee.Image, "Images");
                 var mappedEmployee = Map.Map<EmployeeViewModel , Employee>(Employee);
                 UnitOfWork.EmployeeRepository.Add(mappedEmployee);
                 return RedirectToAction("Index");

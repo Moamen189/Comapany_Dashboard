@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -28,5 +29,10 @@ namespace PresentationLayer.Models
         public int DepartmentId { get; set; }
 
         public virtual Department Department { get; set; }
+
+        public IFormFile Image { get; set; }
+
+        public string ImageName { get; set; }
+
     }
 }

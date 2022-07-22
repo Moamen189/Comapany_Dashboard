@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BussniessLayer\BussniessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\Images\" />
+  </ItemGroup>
+
 </Project>

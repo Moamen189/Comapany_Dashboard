@@ -20,14 +20,14 @@ namespace PresentationLayer.Controllers
             this.unitOfWork = unitOfWork;
             this.mapper = Mapper;
         }
-        public IActionResult Index()
+        public  IActionResult Index()
         {
             //ViewData["Message"] = "Hellp View Data";
             //ViewBag.Messages = "Hello View Bag";
-            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(unitOfWork.DepartmentRepository.GetAll().Result);
+            var DeptModel = mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(unitOfWork.DepartmentRepository.GetAll());
 
 
-            return View(DeptModel);
+            return  View(DeptModel);
         }
 
         public IActionResult Details(int? id , string ViewName= "Details")
