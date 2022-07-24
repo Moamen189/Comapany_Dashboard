@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class AddIsAgreeColumnToAspNetUserTable : Migration
+    public partial class LastUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

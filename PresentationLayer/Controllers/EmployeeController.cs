@@ -70,7 +70,7 @@ namespace PresentationLayer.Controllers
 
             };
 
-            return View(ViewName, vm );
+            return View(ViewName ,vm);
         }
 
 

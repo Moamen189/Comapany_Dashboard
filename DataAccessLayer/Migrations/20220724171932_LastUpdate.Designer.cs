@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(MvcContext))]
-    [Migration("20220724023354_AddIsAgreeColumnToAspNetUserTable")]
-    partial class AddIsAgreeColumnToAspNetUserTable
+    [Migration("20220724171932_LastUpdate")]
+    partial class LastUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
