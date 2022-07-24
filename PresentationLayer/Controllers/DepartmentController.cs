@@ -43,7 +43,18 @@ namespace PresentationLayer.Controllers
 
             if (Department== null)
                 return NotFound();
-            return View(ViewName ,Department);
+
+            var Vm = new DepartmentViewModel()
+            {
+                Id = Department.Id,
+                Name = Department.Name,
+                Code = Department.Code,
+                DateOfCreation = Department.DateOfCreation,
+                Departments = Department.Departments,
+
+
+            };
+            return View(ViewName , Vm);
         }
 
 

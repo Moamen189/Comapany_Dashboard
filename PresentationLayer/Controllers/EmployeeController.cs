@@ -53,7 +53,24 @@ namespace PresentationLayer.Controllers
 
             if (Employee == null)
                 return NotFound();
-            return View(ViewName, Employee);
+            var vm = new EmployeeViewModel()
+            {
+                Id = Employee.Id,
+                Name = Employee.Name,
+                Age = Employee.Age,
+                Address = Employee.Address,
+                Salary = Employee.Salary,
+                IsActive = Employee.IsActive,
+                Email = Employee.Email,
+                PhoneNumber = Employee.PhoneNumber,
+                HireDate = Employee.HireDate,
+                DepartmentId = Employee.DepartmentId,
+                Department = Employee.Department,
+                ImageName = Employee.ImageName,
+
+            };
+
+            return View(ViewName, vm );
         }
 
 
