@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Context
 {
-    public class MvcContext:DbContext
+    public class MvcContext: IdentityDbContext<ApplicationUser>
     {
         public MvcContext(DbContextOptions<MvcContext> options):base(options)
         {

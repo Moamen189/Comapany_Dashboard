@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BussniessLayer.Interfaces;
 using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Helper;
 using PresentationLayer.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace PresentationLayer.Controllers
 {
+        [Authorize]
     public class EmployeeController : Controller
     {
         public IUnitOfWork UnitOfWork { get; }
@@ -41,7 +43,7 @@ namespace PresentationLayer.Controllers
             }
         }
 
-        public IActionResult Details(int? id, string ViewName = "Details")
+        public IActionResult Details(int? id, string ViewName = "Details" )
         {
 
             if (id == null)
@@ -98,7 +100,7 @@ namespace PresentationLayer.Controllers
             //if (id == null)
             //    return NotFound();
 
-            //var Employee = EmployeeRepository.Get(id);
+            //var Employee = UnitOfWork.EmployeeRepository.Get(id);
 
             //if (Employee == null)
             //    return NotFound();
@@ -119,12 +121,14 @@ namespace PresentationLayer.Controllers
             {
                 try
                 {
+                    Employee.ImageName = DocumentSettings.Upload(Employee.Image, "Images");
+
                     var mappedEmployee = Map.Map<EmployeeViewModel, Employee>(Employee);
 
                     UnitOfWork.EmployeeRepository.Update(mappedEmployee);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                     return View(Employee);
@@ -153,11 +157,11 @@ namespace PresentationLayer.Controllers
             try
             {
                 var mappedEmployee = Map.Map<EmployeeViewModel, Employee>(Employee);
-
+                DocumentSettings.Delete(Employee.ImageName, "Images");
                 UnitOfWork.EmployeeRepository.Delete(mappedEmployee);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 return View(Employee);

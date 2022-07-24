@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
 namespace BussniessLayer.Interfaces
 {
     public interface IDepartmentRepository : IGenericRepository<Department>

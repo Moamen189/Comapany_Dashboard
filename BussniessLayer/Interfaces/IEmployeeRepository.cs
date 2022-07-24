@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace BussniessLayer.Interfaces
 {
     public interface IEmployeeRepository :   IGenericRepository<Employee>

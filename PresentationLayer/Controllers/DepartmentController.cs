@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BussniessLayer.Interfaces;
 using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PresentationLayer.Models;
 using System;
@@ -8,6 +9,8 @@ using System.Collections.Generic;
 
 namespace PresentationLayer.Controllers
 {
+    [Authorize]
+
     public class DepartmentController : Controller
     {
         //private readonly IDepartmentRepository departmentRepository;
@@ -95,7 +98,7 @@ namespace PresentationLayer.Controllers
                     unitOfWork.DepartmentRepository.Update(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                       
                     return View(department);
@@ -127,7 +130,7 @@ namespace PresentationLayer.Controllers
                 unitOfWork.DepartmentRepository.Delete(DeptModel);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                     return View(department);

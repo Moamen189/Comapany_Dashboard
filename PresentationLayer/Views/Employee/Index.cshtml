@@ -30,6 +30,8 @@
         <tr>
             <th>@Html.DisplayNameFor(D => D.Name)</th>
             <th>@Html.DisplayNameFor(D => D.Age)</th>
+            <th>@Html.DisplayNameFor(D => D.Image)</th>
+
             <th>@Html.DisplayNameFor(D => D.Address)</th>
             <th>@Html.DisplayNameFor(D => D.Salary)</th>
             <th>@Html.DisplayNameFor(D => D.Department)</th>
@@ -51,6 +53,10 @@
                 <tr>
                     <td>@Employee.Name</td>
                     <td>@Employee.Age</td>
+                    <td>
+                        <img src="~/files/Images/@Employee.ImageName" class="img-circle" width="40" hight="40" alt="Employee Image"  asp-append-version="true"/> 
+                    </td>
+
                     <td>@Employee.Address</td>
                     <td>@Html.DisplayFor(M =>@Employee.Salary)</td>
                    @* <td>@Employee.Salary</td>*@
