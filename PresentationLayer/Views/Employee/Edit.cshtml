@@ -19,7 +19,7 @@
 <form asp-action="Edit" enctype="multipart/form-data">
     
     <div asp-validation-summary="All"></div>
-    <input type="hidden" asp-for="Id" />
+   <input hidden asp-for="Id" />
        <div class ="form-group">
         <label class="cal-form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />
@@ -65,11 +65,11 @@
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
 
-@*  <div class ="form-group">
+  <div class ="form-group">
         <label  asp-for="Image"></label>
         <input  asp-for="Image" class="form-control" />
         <span asp-validation-for="Image" class="text-danger"></span>
-    </div>*@
+    </div>
 
     
            <div class ="form-group">

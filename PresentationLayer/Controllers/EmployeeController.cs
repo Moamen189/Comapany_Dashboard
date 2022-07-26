@@ -145,7 +145,7 @@ namespace PresentationLayer.Controllers
                     UnitOfWork.EmployeeRepository.Update(mappedEmployee);
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
                     return View(Employee);
@@ -178,7 +178,7 @@ namespace PresentationLayer.Controllers
                 UnitOfWork.EmployeeRepository.Delete(mappedEmployee);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return View(Employee);

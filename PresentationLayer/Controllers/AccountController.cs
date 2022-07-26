@@ -93,5 +93,21 @@ namespace PresentationLayer.Controllers
 
         }
         #endregion
+
+
+        #region ForgetPassword
+
+        //public IActionResult ForgetPassword()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+
+        //public IActionResult ForgetPassword()
+        //{
+        //    return View();
+        //}
+        #endregion
     }
 }
