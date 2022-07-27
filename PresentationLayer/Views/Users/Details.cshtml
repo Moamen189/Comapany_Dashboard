@@ -1,0 +1,33 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>User Details</h1>
+
+<div>
+    <div class ="form-group">
+        <label class="cal-form-label" asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" readonly />
+       
+    </div>
+    
+     
+   
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" readonly/>
+        
+    </div>
+           <div class ="form-group">
+        <label class="cal-form-label" asp-for="PhoneNumber"></label>
+        <input class="form-control" asp-for="PhoneNumber" readonly/>
+        
+    </div>
+         
+    <a asp-controller="Users" asp-action="Edit" class="btn btn-primary">Edit</a> |
+    
+    <a asp-controller="Users" asp-action="Index" class="btn btn-warning">Back To List</a>
+
+</div>
+
