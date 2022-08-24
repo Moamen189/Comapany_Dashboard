@@ -28,7 +28,7 @@ namespace PresentationLayer.Controllers
             this.Map = Map;
         }
 
-        public IActionResult Index( string SearchValue)
+        public IActionResult Index(string SearchValue)
         {
             if (string.IsNullOrEmpty(SearchValue))
             {
