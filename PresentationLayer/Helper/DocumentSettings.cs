@@ -10,7 +10,7 @@ namespace PresentationLayer.Helper
         {
             var FolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files/", FolderName);
 
-            var fileName = Guid.NewGuid()+Path.GetFileName(File.Name);
+            var fileName = Guid.NewGuid()+Path.GetFileName(File.FileName);
 
             var filePath = Path.Combine(FolderPath, fileName);
 
