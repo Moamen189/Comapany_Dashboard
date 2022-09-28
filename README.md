@@ -1,4 +1,4 @@
-## Comap Dashboard
+## Comapany Dashboard
 
 
 
