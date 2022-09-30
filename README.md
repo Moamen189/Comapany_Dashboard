@@ -1,4 +1,4 @@
-## Comapany Dashboard
+## Company Dashboard
 
 
 
